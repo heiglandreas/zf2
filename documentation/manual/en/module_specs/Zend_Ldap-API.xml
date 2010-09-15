@@ -7,13 +7,13 @@
         <title>Configuration / options</title>
 
         <para>
-            The <classname>Zend_Ldap</classname> component accepts an array of options either
+            The <classname>\Zend\Ldap\Ldap</classname> component accepts an array of options either
             supplied to the constructor or through the <methodname>setOptions()</methodname>
             method. The permitted options are as follows:
         </para>
 
         <table id="zend.ldap.api.configuration.table">
-            <title>Zend_Ldap Options</title>
+            <title>\Zend\Ldap\Ldap Options</title>
 
             <tgroup cols="2">
                 <thead>
@@ -98,7 +98,7 @@
 
                         <entry>
                             If <constant>TRUE</constant>, this instructs
-                            <classname>Zend_Ldap</classname> to retrieve the DN for the
+                            <classname>\Zend\Ldap\Ldap</classname> to retrieve the DN for the
                             account used to bind if the username is not
                             already in DN form. The default value is <constant>FALSE</constant>.
                         </entry>

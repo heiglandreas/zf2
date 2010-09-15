@@ -4,7 +4,7 @@
     <title>Introduction</title>
 
     <para>
-        <classname>Zend_Ldap</classname> is a class for performing <acronym>LDAP</acronym>
+        <classname>\Zend\Ldap\Ldap</classname> is a class for performing <acronym>LDAP</acronym>
         operations including but not limited to binding, searching and modifying entries
         in an <acronym>LDAP</acronym> directory.
     </para>
@@ -13,34 +13,34 @@
         <title>Theory of operation</title>
 
         <para>
-            This component currently consists of the main <classname>Zend_Ldap</classname> class,
+            This component currently consists of the main <classname>\Zend\Ldap\Ldap</classname> class,
             that conceptually represents a binding to a single <acronym>LDAP</acronym> server
             and allows for executing operations against a <acronym>LDAP</acronym> server such
             as OpenLDAP or ActiveDirectory (AD) servers. The parameters for binding may be
             provided explicitly or in the form of an options array.
-            <classname>Zend_Ldap_Node</classname> provides an object-oriented interface
+            <classname>\Zend\Ldap\Node</classname> provides an object-oriented interface
             for single <acronym>LDAP</acronym> nodes and can be used to form a basis for an
             active-record-like interface for a <acronym>LDAP</acronym>-based domain model.
         </para>
 
         <para>
             The component provides several helper classes to perform operations on
-            <acronym>LDAP</acronym> entries (<classname>Zend_Ldap_Attribute</classname>) such as
+            <acronym>LDAP</acronym> entries (<classname>\Zend\Ldap\Attribute</classname>) such as
             setting and retrieving attributes (date values, passwords, boolean values, ...), to
             create and modify <acronym>LDAP</acronym> filter strings
-            (<classname>Zend_Ldap_Filter</classname>) and to manipulate <acronym>LDAP</acronym>
-            distinguished names (DN) (<classname>Zend_Ldap_Dn</classname>).
+            (<classname>\Zend\Ldap\Filter</classname>) and to manipulate <acronym>LDAP</acronym>
+            distinguished names (DN) (<classname>\Zend\Ldap\Dn</classname>).
         </para>
 
         <para>
             Additionally the component abstracts <acronym>LDAP</acronym> schema browsing
-            for OpenLDAP and ActiveDirectoy servers <classname>Zend_Ldap_Node_Schema</classname>
+            for OpenLDAP and ActiveDirectoy servers <classname>\Zend\Ldap\Node\Schema</classname>
             and server information retrieval for OpenLDAP-, ActiveDirectory- and Novell
-            eDirectory servers (<classname>Zend_Ldap_Node_RootDse</classname>).
+            eDirectory servers (<classname>\Zend\Ldap\Node\RootDse</classname>).
         </para>
 
         <para>
-            Using the <classname>Zend_Ldap</classname> class depends on the type of
+            Using the <classname>\Zend\Ldap\Ldap</classname> class depends on the type of
             <acronym>LDAP</acronym> server and is best summarized with some simple examples.
         </para>
 
@@ -51,17 +51,18 @@
         </para>
 
         <programlisting language="php"><![CDATA[
+use Zend\Ldap
 $options = array(
-    'host'              => 's0.foo.net',
-    'username'          => 'CN=user1,DC=foo,DC=net',
+    'host'              => 's0.example.com',
+    'username'          => 'CN=user1,DC=example,DC=com',
     'password'          => 'pass1',
     'bindRequiresDn'    => true,
-    'accountDomainName' => 'foo.net',
-    'baseDn'            => 'OU=Sales,DC=foo,DC=net',
+    'accountDomainName' => 'example.com',
+    'baseDn'            => 'OU=Sales,DC=example,DC=com',
 );
-$ldap = new Zend_Ldap($options);
+$ldap = new Ldap($options);
 $acctname = $ldap->getCanonicalAccountName('abaker',
-                                           Zend_Ldap::ACCTNAME_FORM_DN);
+                                           Ldap::ACCTNAME_FORM_DN);
 echo "$acctname\n";
 ]]></programlisting>
 
@@ -70,18 +71,19 @@ echo "$acctname\n";
         </para>
 
         <programlisting language="php"><![CDATA[
+use Zend\Ldap
 $options = array(
-    'host'                   => 'dc1.w.net',
+    'host'                   => 'dc1.example.com',
     'useStartTls'            => true,
-    'username'               => 'user1@w.net',
+    'username'               => 'user1@example.com',
     'password'               => 'pass1',
-    'accountDomainName'      => 'w.net',
-    'accountDomainNameShort' => 'W',
-    'baseDn'                 => 'CN=Users,DC=w,DC=net',
+    'accountDomainName'      => 'example.com',
+    'accountDomainNameShort' => 'EXAMPLE',
+    'baseDn'                 => 'CN=Users,DC=example,DC=com',
 );
-$ldap = new Zend_Ldap($options);
+$ldap = new Ldap($options);
 $acctname = $ldap->getCanonicalAccountName('bcarter',
-                                           Zend_Ldap::ACCTNAME_FORM_DN);
+                                           Ldap::ACCTNAME_FORM_DN);
 echo "$acctname\n";
 ]]></programlisting>
 
@@ -98,14 +100,14 @@ echo "$acctname\n";
                 If <methodname>bind()</methodname> is called with a non-DN username but
                 <emphasis>bindRequiresDN</emphasis> is <constant>TRUE</constant> and no username in
                 DN form was supplied as an option, the bind will fail. However, if a username in DN
-                form is supplied in the options array, <classname>Zend_Ldap</classname> will
+                form is supplied in the options array, <classname>\Zend\Ldap\Ldap</classname> will
                 first bind with that username, retrieve the account DN for the username
                 supplied to <methodname>bind()</methodname> and then re-bind with that DN.
             </para>
 
             <para>
                 This behavior is critical to <link
-                    linkend="zend.auth.adapter.ldap"><classname>Zend_Auth_Adapter_Ldap</classname></link>,
+                    linkend="zend.auth.adapter.ldap"><classname>Zend\Auth\Adapter\Ldap</classname></link>,
                 which passes the username supplied by the user directly to
                 <methodname>bind()</methodname>.
             </para>
@@ -116,18 +118,19 @@ echo "$acctname\n";
             </para>
 
             <programlisting language="php"><![CDATA[
+use Zend\Ldap
 $options = array(
-        'host'              => 's0.foo.net',
-        'username'          => 'CN=user1,DC=foo,DC=net',
+        'host'              => 's0.example.com',
+        'username'          => 'CN=user1,DC=example,DC=com',
         'password'          => 'pass1',
         'bindRequiresDn'    => true,
-        'accountDomainName' => 'foo.net',
-        'baseDn'            => 'OU=Sales,DC=foo,DC=net',
+        'accountDomainName' => 'example.com',
+        'baseDn'            => 'OU=Sales,DC=example,DC=com',
 );
-$ldap = new Zend_Ldap($options);
+$ldap = new Ldap($options);
 $ldap->bind('abaker', 'moonbike55');
 $acctname = $ldap->getCanonicalAccountName('abaker',
-                                           Zend_Ldap::ACCTNAME_FORM_DN);
+                                           Ldap::ACCTNAME_FORM_DN);
 echo "$acctname\n";
 ]]></programlisting>
 
@@ -135,10 +138,10 @@ echo "$acctname\n";
                 The <methodname>bind()</methodname> call in this example sees that
                 the username '<emphasis>abaker</emphasis>' is not in DN form, finds
                 <emphasis>bindRequiresDn</emphasis> is <constant>TRUE</constant>, uses
-                '<command>CN=user1,DC=foo,DC=net</command>' and '<emphasis>pass1</emphasis>' to
+                '<command>CN=user1,DC=example,DC=com</command>' and '<emphasis>pass1</emphasis>' to
                 bind, retrieves the DN for '<emphasis>abaker</emphasis>', unbinds and then rebinds
                 with the newly discovered
-                '<command>CN=Alice Baker,OU=Sales,DC=foo,DC=net</command>'.
+                '<command>CN=Alice Baker,OU=Sales,DC=example,DC=com</command>'.
             </para>
         </sect3>
 
@@ -219,10 +222,10 @@ echo "$acctname\n";
             <title>Multi-domain Authentication and Failover</title>
 
             <para>
-                The <classname>Zend_Ldap</classname> component by itself makes no attempt
-                to authenticate with multiple servers. However, <classname>Zend_Ldap</classname>
+                The <classname>\Zend\Ldap\Ldap</classname> component by itself makes no attempt
+                to authenticate with multiple servers. However, <classname>\Zend\Ldap\Ldap</classname>
                 is specifically designed to handle this scenario gracefully. The
-                required technique is to simply iterate over an array of arrays of serve
+                required technique is to simply iterate over an array of arrays of server
                  options and attempt to bind with each server. As described above
                  <methodname>bind()</methodname> will automatically canonicalize each name, so
                 it does not matter if the user passes <filename>abaker@foo.net</filename> or
@@ -237,19 +240,20 @@ echo "$acctname\n";
             </para>
 
             <programlisting language="php"><![CDATA[
+use Zend\Ldap
 $acctname = 'W\\user2';
 $password = 'pass2';
 
 $multiOptions = array(
     'server1' => array(
-        'host'                   => 's0.foo.net',
-        'username'               => 'CN=user1,DC=foo,DC=net',
+        'host'                   => 's0.example.com',
+        'username'               => 'CN=user1,DC=example,DC=com',
         'password'               => 'pass1',
         'bindRequiresDn'         => true,
-        'accountDomainName'      => 'foo.net',
-        'accountDomainNameShort' => 'FOO',
+        'accountDomainName'      => 'example.com',
+        'accountDomainNameShort' => 'EXAMPLE',
         'accountCanonicalForm'   => 4, // ACCT_FORM_PRINCIPAL
-        'baseDn'                 => 'OU=Sales,DC=foo,DC=net',
+        'baseDn'                 => 'OU=Sales,DC=example,DC=com',
     ),
     'server2' => array(
         'host'                   => 'dc1.w.net',
@@ -263,7 +267,7 @@ $multiOptions = array(
     ),
 );
 
-$ldap = new Zend_Ldap();
+$ldap = new Ldap();
 
 foreach ($multiOptions as $name => $options) {
 
@@ -275,9 +279,9 @@ foreach ($multiOptions as $name => $options) {
         $acctname = $ldap->getCanonicalAccountName($acctname);
         echo "SUCCESS: authenticated $acctname\n";
         return;
-    } catch (Zend_Ldap_Exception $zle) {
+    } catch (LdapException $zle) {
         echo '  ' . $zle->getMessage() . "\n";
-        if ($zle->getCode() === Zend_Ldap_Exception::LDAP_X_DOMAIN_MISMATCH) {
+        if ($zle->getCode() === LdapException::LDAP_X_DOMAIN_MISMATCH) {
             continue;
         }
     }
@@ -314,7 +318,7 @@ foreach ($multiOptions as $name => $options) {
 
             <para>
                 The above code is very similar to code used within <link
-                    linkend="zend.auth.adapter.ldap"><classname>Zend_Auth_Adapter_Ldap</classname></link>.
+                    linkend="zend.auth.adapter.ldap"><classname>\Zend\Auth\Adapter\Ldap</classname></link>.
                 In fact, we recommend that you simply use that authentication adapter for
                 multi-domain + failover <acronym>LDAP</acronym> based authentication
                 (or copy the code).

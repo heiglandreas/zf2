@@ -11,7 +11,34 @@
 
             <sect4 id="zend.ldap.node.basic.retrieve.dn">
                 <title>Getting a node by its DN</title>
-                <para/>
+                <para>You can get an <acronym>LDAP</acronym>-Node by its Distinguished
+                    Name (DN) by either supplying the DN as string or as <classname>\Zend\Ldap\Dn</classname>-Object
+                    to <classname>\Zend\Ldap\Ldap</classname>::<methodname>getNode()</methodname> as illustrated in these examples:
+                    <programlisting language="php"><![CDATA[
+$opts = array(/* ... */);
+$ldap = new \Zend\Ldap\Ldap($opts);
+$ldap -> bind ();
+$dn   = 'uid=abaker,cn=Users,dc=example,c=com';
+$node = $ldap -> getNode($dn)
+                    ]]></programlisting>
+                    <programlisting language="php"><![CDATA[
+$opts = array(/* ... */);
+$ldap = new \Zend\Ldap\Ldap($opts);
+$ldap -> bind ();
+$dn = 'uid=abaker,cn=Users,dc=example,c=com';
+// Alternate way of specifying a DN
+// $dn = array ( 'uid' => 'abaker', 'cn' => 'Users', 'dc' => 'example', 'c' => 'com' );
+$dn   = \Zend\Ldap\Dn::factory($dn);
+$node = $ldap -> getNode($dn)
+                    ]]></programlisting>
+                </para>
+                <para>Alternatively you can use the <classname>\Zend\Ldap\Node</classname>::<methodname>fromLdap</methodname>-Method
+                by providing a string or a <classname>Zend\Ldap\Dn</classname>-Object as parameter.
+                <programlisting language="php"><![CDATA[
+$dn   = 'uid=abaker,cn=Users,dc=example,c=com';
+$node = \Zend\Ldap\Node::fromLdap($ldap, $dn);
+                ]]></programlisting>
+                </para>
             </sect4>
 
             <sect4 id="zend.ldap.node.basic.retrieve.search">
@@ -22,7 +49,21 @@
 
         <sect3 id="zend.ldap.node.basic.add">
             <title>Adding a new node to the LDAP</title>
-            <para/>
+                <para>For inserting a node into the <acronym>LDAP</acronym> it is also possible to
+                create a detached node by using the <classname>\Zend\Ldap\Node</classname>::<methodname>fromArray</methodname>-Method
+                with an array containing the attributes of the Node.
+                <programlisting language="php"><![CDATA[
+$attributes = array (
+               'dn'          => 'uid=jdoe,dc=Users,dc=example,c=com',
+               'uid'         => 'jdoe',
+               'sn'          => 'Doe',
+               'givenName'   => 'Jane',
+               'objectclass' => 'posixAccount',
+               ...
+              )
+$node = \Zend\Ldap\Node::fromArray($attributes, true);
+                ]]></programlisting>
+                </para>
         </sect3>
 
         <sect3 id="zend.ldap.node.basic.delete">
@@ -53,7 +94,7 @@
 
             <programlisting language="php"><![CDATA[
 $options = array(/* ... */);
-$ldap = new Zend_Ldap($options);
+$ldap = new \Zend\Ldap\Ldap($options);
 $ldap->bind();
 $ri = new RecursiveIteratorIterator($ldap->getBaseNode(),
                                     RecursiveIteratorIterator::SELF_FIRST);

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect3 id="zend.ldap.api.reference.zend-ldap-ldif-encoder">
-    <title>Zend_Ldif_Encoder</title>
+    <title>\Zend\Ldap\Ldif\Encoder</title>
 
     <table id="zend.ldap.api.reference.zend-ldap-ldif-encoder.table">
-        <title>Zend_Ldif_Encoder API</title>
+        <title>\Zend\Ldap\Ldif\Encoder API</title>
 
         <tgroup cols="2">
             <thead>
@@ -28,7 +28,7 @@
 
                 <row>
                     <entry>
-                        <emphasis><code>string encode(scalar|array|Zend_Ldap_Node
+                        <emphasis><code>string encode(scalar|array|\Zend\Ldap\Node
                         $value, array $options)</code> </emphasis>
                     </entry>
 

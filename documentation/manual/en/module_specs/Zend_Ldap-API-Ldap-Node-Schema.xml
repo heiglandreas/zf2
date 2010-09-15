@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect3 id="zend.ldap.api.reference.zend-ldap-node-schema">
-    <title>Zend_Ldap_Node_Schema</title>
+    <title>\Zend\Ldap\Node\Schema</title>
 
     <para>The following methods are available on all vendor-specific subclasses.</para>
 
     <para>
-        <code>Zend_Ldap_Node_Schema</code> includes the magic property accessors
+        <code>\Zend\Ldap\Node\Schema</code> includes the magic property accessors
         <code>__get()</code> and <code>__isset()</code> to access the attributes by their
-        name. They proxy to <code>Zend_Ldap_Node_Schema::getAttribute()</code> and
-        <code>Zend_Ldap_Node_Schema::existsAttribute()</code> respectively.
+        name. They proxy to <code>\Zend\Ldap\Node\Schema::getAttribute()</code> and
+        <code>\Zend\Ldap\Node\Schema::existsAttribute()</code> respectively.
         <code>__set()</code> and <code>__unset()</code> are also implemented, but they throw
         a <code>BadMethodCallException</code> as modifications are not allowed on RootDSE
         nodes. Furthermore the class implements <code>ArrayAccess</code> for
@@ -19,7 +19,7 @@
     </para>
 
     <table id="zend.ldap.api.reference.zend-ldap-node-schema.table">
-        <title>Zend_Ldap_Node_Schema API</title>
+        <title>\Zend\Ldap\Node\Schema API</title>
 
         <tgroup cols="2">
             <thead>
@@ -31,10 +31,10 @@
 
             <tbody>
                 <row>
-                    <entry><code>Zend_Ldap_Dn getDn()</code></entry>
+                    <entry><code>\Zend\Ldap\Dn getDn()</code></entry>
 
                     <entry>
-                        Gets the DN of the current node as a <classname>Zend_Ldap_Dn</classname>.
+                        Gets the DN of the current node as a <classname>\Zend\Ldap\Dn</classname>.
                     </entry>
                 </row>
 
@@ -68,7 +68,7 @@
 
                     <entry>
                         Returns the DN of the current node - proxies to
-                        <code>Zend_Ldap_Dn::getDnString()</code>.
+                        <code>\Zend\Ldap\Dn::getDnString()</code>.
                     </entry>
                 </row>
 
@@ -77,7 +77,7 @@
 
                     <entry>
                         Casts to string representation - proxies to
-                        <code>Zend_Ldap_Dn::toString()</code>.
+                        <code>\Zend\Ldap\Dn::toString()</code>.
                     </entry>
                 </row>
 
@@ -89,7 +89,7 @@
                         <code>$includeSystemAttributes</code> is <constant>FALSE</constant>
                         (defaults to <constant>TRUE</constant>), the system specific attributes are
                         stripped from the array. Unlike
-                        <code>Zend_Ldap_Node_Schema::getAttributes()</code>, the resulting
+                        <code>\Zend\Ldap\Node\Schema::getAttributes()</code>, the resulting
                         array contains the DN with key <code>'dn'</code>.
                     </entry>
                 </row>
@@ -99,7 +99,7 @@
 
                     <entry>
                         Returns a <acronym>JSON</acronym> representation of the current node using
-                        <code>Zend_Ldap_Node_Schema::toArray()</code>.
+                        <code>\Zend\Ldap\Node\Schema::toArray()</code>.
                     </entry>
                 </row>
 
@@ -157,7 +157,7 @@
 
                     <entry>
                         Gets a <acronym>LDAP</acronym> attribute. Data conversion is applied using
-                        <code>Zend_Ldap_Attribute::getAttribute()</code>.
+                        <code>\Zend\Ldap\Attribute::getAttribute()</code>.
                     </entry>
                 </row>
 
@@ -182,13 +182,13 @@
 
                     <entry>
                         Gets a <acronym>LDAP</acronym> date/time attribute. Data conversion is
-                        applied using <code>Zend_Ldap_Attribute::getDateTimeAttribute()</code>.
+                        applied using <code>\Zend\Ldap\Attribute::getDateTimeAttribute()</code>.
                     </entry>
                 </row>
 
                 <row>
                     <entry>
-                        <code>Zend_Ldap_Node_Schema reload(Zend_Ldap $ldap)</code>
+                        <code>\Zend\Ldap\Node\Schema reload(\Zend\Ldap\Ldap $ldap)</code>
                     </entry>
 
                     <entry>
@@ -199,7 +199,7 @@
 
                 <row>
                     <entry>
-                        <emphasis><code>Zend_Ldap_Node_Schema create(Zend_Ldap
+                        <emphasis><code>\Zend\Ldap\Node\Schema create(\Zend\Ldap\Ldap
                         $ldap)</code> </emphasis>
                     </entry>
 
@@ -216,7 +216,7 @@
 
                     <entry>
                         Gets the object classes as an array of
-                        <code>Zend_Ldap_Node_Schema_ObjectClass_Interface</code>.
+                        <code>\Zend\Ldap\Node\Schema\ObjectClass\Interface</code>.
                     </entry>
                 </row>
             </tbody>
@@ -224,7 +224,7 @@
     </table>
 
     <table id="zend.ldap.api.reference.zend-ldap-node-schema.attributetype-interface.table">
-        <title>Zend_Ldap_Node_Schema_AttributeType_Interface API</title>
+        <title>\Zend\Ldap\Node\Schema\AttributeType\Interface API</title>
 
         <tgroup cols="2">
             <thead>
@@ -269,7 +269,7 @@
     </table>
 
     <table id="zend.ldap.api.reference.zend-ldap-node-schema.objectclass-interface.table">
-        <title>Zend_Ldap_Node_Schema_ObjectClass_Interface API</title>
+        <title>\Zend\Ldap\Node\Schema\ObjectClass\Interface API</title>
 
         <tgroup cols="2">
             <thead>
@@ -314,22 +314,22 @@
 
                         <variablelist>
                             <varlistentry>
-                                <term><code>Zend_Ldap_Node_Schema::OBJECTCLASS_TYPE_UNKNOWN</code></term>
+                                <term><code>\Zend\Ldap\Node\Schema::OBJECTCLASS_TYPE_UNKNOWN</code></term>
                                 <listitem><para>for unknown class types</para></listitem>
                             </varlistentry>
 
                             <varlistentry>
-                                <term><code>Zend_Ldap_Node_Schema::OBJECTCLASS_TYPE_STRUCTURAL</code></term>
+                                <term><code>\Zend\Ldap\Node\Schema::OBJECTCLASS_TYPE_STRUCTURAL</code></term>
                                 <listitem><para>for structural classes</para></listitem>
                             </varlistentry>
 
                             <varlistentry>
-                                <term><code>Zend_Ldap_Node_Schema::OBJECTCLASS_TYPE_ABSTRACT</code></term>
+                                <term><code>\Zend\Ldap\Node\Schema::OBJECTCLASS_TYPE_ABSTRACT</code></term>
                                 <listitem><para>for abstract classes</para></listitem>
                             </varlistentry>
 
                             <varlistentry>
-                                <term><code>Zend_Ldap_Node_Schema::OBJECTCLASS_TYPE_AUXILIARY</code></term>
+                                <term><code>\Zend\Ldap\Node\Schema::OBJECTCLASS_TYPE_AUXILIARY</code></term>
                                 <listitem><para>for auxiliary classes</para></listitem>
                             </varlistentry>
                         </variablelist>
@@ -350,9 +350,9 @@
 
     <para>
         Classes representing attribute types and object classes extend
-        <code>Zend_Ldap_Node_Schema_Item</code> which provides some core methods to access
+        <code>\Zend\Ldap\Node\Schema\Item</code> which provides some core methods to access
         arbitrary attributes on the underlying <acronym>LDAP</acronym> node.
-        <code>Zend_Ldap_Node_Schema_Item</code> includes the magic property accessors
+        <code>\Zend\Ldap\Node\Schema\Item</code> includes the magic property accessors
         <code>__get()</code> and <code>__isset()</code> to access the attributes by their
         name. Furthermore the class implements <code>ArrayAccess</code> for
         array-style-access to the attributes. <code>offsetSet()</code> and
@@ -361,7 +361,7 @@
     </para>
 
     <table id="zend.ldap.api.reference.zend-ldap-node-schema.schema-item.table">
-        <title>Zend_Ldap_Node_Schema_Item API</title>
+        <title>\Zend\Ldap\Node\Schema\Item API</title>
 
         <tgroup cols="2">
             <thead>
@@ -394,11 +394,11 @@
 
         <para>
             Additionally the common methods above apply to instances of
-            <code>Zend_Ldap_Node_Schema_OpenLDAP</code>.
+            <code>\Zend\Ldap\Node\Schema\OpenLDAP</code>.
         </para>
 
         <table id="zend.ldap.api.reference.zend-ldap-node-schema.openldap.table">
-            <title>Zend_Ldap_Node_Schema_OpenLDAP API</title>
+            <title>\Zend\Ldap\Node\Schema\OpenLDAP API</title>
 
             <tgroup cols="2">
                 <thead>
@@ -429,7 +429,7 @@
 
         <table
             id="zend.ldap.api.reference.zend-ldap-node-schema.openldap.attributetype-interface.table">
-            <title>Zend_Ldap_Node_Schema_AttributeType_OpenLDAP API</title>
+            <title>\Zend\Ldap\Node\Schema\AttributeType\OpenLDAP API</title>
 
             <tgroup cols="2">
                 <thead>
@@ -442,7 +442,7 @@
                 <tbody>
                     <row>
                         <entry>
-                            <code>Zend_Ldap_Node_Schema_AttributeType_OpenLdap|null
+                            <code>\Zend\Ldap\Node\Schema\AttributeType\OpenLdap|null
                                 getParent()</code>
                         </entry>
 
@@ -456,7 +456,7 @@
 
         <table
             id="zend.ldap.api.reference.zend-ldap-node-schema.openldap.objectclass-interface.table">
-            <title>Zend_Ldap_Node_Schema_ObjectClass_OpenLDAP API</title>
+            <title>\Zend\Ldap\Node\Schema\ObjectClass\OpenLDAP API</title>
 
             <tgroup cols="2">
                 <thead>
@@ -473,7 +473,7 @@
                         <entry>
                             Returns the parent object classes in the inheritance
                             tree if one exists. The returned array is an array of
-                            <code>Zend_Ldap_Node_Schema_ObjectClass_OpenLdap</code>.
+                            <code>\Zend\Ldap\Node\Schema\ObjectClass\OpenLdap</code>.
                         </entry>
                     </row>
                 </tbody>
@@ -497,19 +497,19 @@
         </note>
 
         <para>
-            <code>Zend_Ldap_Node_Schema_ActiveDirectory</code> does not provide any
+            <code>\Zend\Ldap\Node\Schema\ActiveDirectory</code> does not provide any
             additional methods.
         </para>
 
         <table
             id="zend.ldap.api.reference.zend-ldap-node-schema.activedirectory.attributetype-interface.table">
-            <title>Zend_Ldap_Node_Schema_AttributeType_ActiveDirectory API</title>
+            <title>\Zend\Ldap\Node\Schema\AttributeType\ActiveDirectory API</title>
 
             <tgroup cols="1">
                 <tbody>
                     <row>
                         <entry>
-                            <code>Zend_Ldap_Node_Schema_AttributeType_ActiveDirectory</code>
+                            <code>\Zend\Ldap\Node\Schema\AttributeType\ActiveDirectory</code>
                             does not provide any additional methods.
                         </entry>
                     </row>
@@ -519,13 +519,13 @@
 
         <table
             id="zend.ldap.api.reference.zend-ldap-node-schema.activedirectory.objectclass-interface.table">
-            <title>Zend_Ldap_Node_Schema_ObjectClass_ActiveDirectory API</title>
+            <title>\Zend\Ldap\Node\Schema\ObjectClass\ActiveDirectory API</title>
 
             <tgroup cols="1">
                 <tbody>
                     <row>
                         <entry>
-                            <code>Zend_Ldap_Node_Schema_ObjectClass_ActiveDirectory</code>
+                            <code>\Zend\Ldap\Node\Schema\ObjectClass\ActiveDirectory</code>
                             does not provide any additional methods.
                         </entry>
                     </row>

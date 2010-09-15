@@ -39,8 +39,9 @@
             <title>Getting hands on the RootDSE</title>
 
             <programlisting language="php"><![CDATA[
+use Zend\Ldap
 $options = array(/* ... */);
-$ldap = new Zend_Ldap($options);
+$ldap = new Ldap($options);
 $rootdse = $ldap->getRootDse();
 $serverType = $rootdse->getServerType();
 ]]></programlisting>
@@ -54,8 +55,9 @@ $serverType = $rootdse->getServerType();
             <title>Getting hands on the server schema</title>
 
             <programlisting language="php"><![CDATA[
+use Zend\Ldap
 $options = array(/* ... */);
-$ldap = new Zend_Ldap($options);
+$ldap = new Ldap($options);
 $schema = $ldap->getSchema();
 $classes = $schema->getObjectClasses();
 ]]></programlisting>

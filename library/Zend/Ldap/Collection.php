@@ -137,7 +137,7 @@ class Collection implements \Iterator, \Countable
      * Implements Iterator
      *
      * @return array|null
-     * @throws \Zend\Ldap\Exception
+     * @throws \Zend\Ldap\LdapException
      */
     public function current()
     {
@@ -208,7 +208,7 @@ class Collection implements \Iterator, \Countable
      * Move forward to next result item
      * Implements Iterator
      *
-     * @throws \Zend\Ldap\Exception
+     * @throws \Zend\Ldap\LdapException
      */
     public function next()
     {
@@ -220,7 +220,7 @@ class Collection implements \Iterator, \Countable
      * Rewind the Iterator to the first result item
      * Implements Iterator
      *
-     * @throws \Zend\Ldap\Exception
+     * @throws \Zend\Ldap\LdapException
      */
     public function rewind()
     {

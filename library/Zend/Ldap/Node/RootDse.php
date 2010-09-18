@@ -52,7 +52,7 @@ class RootDse extends AbstractNode
      *
      * @param  \Zend\Ldap\Ldap $ldap
      * @return \Zend\Ldap\Node\RootDse
-     * @throws \Zend\Ldap\Exception
+     * @throws \Zend\Ldap\LdapException
      */
     public static function create(Ldap\Ldap $ldap)
     {

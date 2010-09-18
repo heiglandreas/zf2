@@ -66,20 +66,20 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
         $optionName = 'invalid';
         try {
             $this->_ldap->setOptions(array($optionName => 'irrelevant'));
-            $this->fail('Expected Zend_LDAP_Exception not thrown');
-        } catch (Ldap\Exception $e) {
-            $this->assertEquals("Unknown Zend_LDAP option: $optionName", $e->getMessage());
+            $this->fail('Expected Zend_Ldap_Exception not thrown');
+        } catch (Ldap\LdapException $e) {
+            $this->assertEquals("Unknown Zend_Ldap option: $optionName", $e->getMessage());
         }
     }
 
     public function testException()
     {
-        $e = new Ldap\Exception(null, '', 0);
+        $e = new Ldap\LdapException(null, '', 0);
         $this->assertEquals('no exception message', $e->getMessage());
         $this->assertEquals(0, $e->getCode());
         $this->assertEquals(0, $e->getErrorCode());
 
-        $e = new Ldap\Exception(null, '', 15);
+        $e = new Ldap\LdapException(null, '', 15);
         $this->assertEquals('0xf: no exception message', $e->getMessage());
         $this->assertEquals(15, $e->getCode());
         $this->assertEquals(15, $e->getErrorCode());

@@ -20,17 +20,23 @@
  */
 
 /**
- * @namespace
+ * @namespace \Zend\Ldap\Exception
  */
-namespace Zend\Ldap;
+namespace \Zend\Ldap\Exception;
 
 /**
- * Zend_Ldap_Exception provides an Interface for Exception-Handling
- *
+ * \Zend\Ldap\Exception
+ */
+require_once 'Zend/Ldap/Exception.php';
+
+/**
+ * @uses       \BadMethodCallException
+ * @uses       \Zend\Ldap\Exception
  * @category   Zend
  * @package    Zend_Ldap
+ * @subpackage Exception
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception
+class BadMethodCallException extends \BadMethodCallException implements \Zend\Ldap\Exception
 {}

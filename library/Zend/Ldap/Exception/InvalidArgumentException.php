@@ -14,25 +14,29 @@
  *
  * @category   Zend
  * @package    Zend_Ldap
- * @subpackage Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
 
 /**
- * @namespace
+ * @namespace \Zend\Ldap\Exception
  */
-namespace Zend\Ldap\Filter;
+namespace Zend\Ldap\Exception;
 
 /**
- * @uses       \Zend\Exception
+ * \Zend\Ldap\Exception
+ */
+require_once 'Zend/Ldap/Exception.php';
+
+/**
+ * @uses       \InvalidArgumentException
+ * @uses       \Zend\Ldap\Exception
  * @category   Zend
  * @package    Zend_Ldap
- * @subpackage Filter
+ * @subpackage Exception
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Exception extends \Zend\Exception
-{
-}
+class InvalidArgumentException extends \InvalidArgumentException implements \Zend\Ldap\Exception
+{}

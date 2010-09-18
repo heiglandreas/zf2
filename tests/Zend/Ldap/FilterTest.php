@@ -116,7 +116,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend\Ldap\Filter\Exception
+     * @expectedException Zend\Ldap\Exception\FilterException
      */
     public function testIllegalGroupingFilter()
     {

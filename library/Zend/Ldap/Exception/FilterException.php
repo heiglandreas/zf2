@@ -14,6 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Ldap
+ * @subpackage Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -22,15 +23,22 @@
 /**
  * @namespace
  */
-namespace Zend\Ldap;
+namespace Zend\Ldap\Exception;
 
 /**
- * Zend_Ldap_Exception provides an Interface for Exception-Handling
- *
+ * \Zend\Ldap\Exception
+ */
+require_once 'Zend/Ldap/Exception.php';
+
+/**
+ * @uses       \Zend\Ldap\Exception
+ * @uses       \Exception
  * @category   Zend
  * @package    Zend_Ldap
+ * @subpackage Exception
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception
-{}
+class FilterException extends \Exception implements \Zend\Ldap\Exception
+{
+}

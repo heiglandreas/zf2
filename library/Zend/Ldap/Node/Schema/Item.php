@@ -30,7 +30,7 @@ namespace Zend\Ldap\Node\Schema;
  * items like objectClass and attribute.
  *
  * @uses       ArrayAccess
- * @uses       BadMethodCallException
+ * @uses       \Zend\Ldap\Exception\BadMethodCallException
  * @uses       Countable
  * @category   Zend
  * @package    Zend_Ldap
@@ -106,7 +106,7 @@ abstract class Item implements \ArrayAccess, \Countable
     }
 
     /**
-     * Always throws BadMethodCallException
+     * Always throws \Zend\Ldap\Exception\BadMethodCallException
      * Implements ArrayAccess.
      *
      * This method is needed for a full implementation of ArrayAccess
@@ -114,11 +114,11 @@ abstract class Item implements \ArrayAccess, \Countable
      * @param  string $name
      * @param  mixed $value
      * @return null
-     * @throws BadMethodCallException
+     * @throws \Zend\Ldap\Exception\BadMethodCallException
      */
     public function offsetSet($name, $value)
     {
-        throw new \BadMethodCallException();
+        throw new \Zend\Ldap\Exception\BadMethodCallException();
     }
 
     /**
@@ -133,18 +133,18 @@ abstract class Item implements \ArrayAccess, \Countable
     }
 
     /**
-     * Always throws BadMethodCallException
+     * Always throws \Zend\Ldap\Exception\BadMethodCallException
      * Implements ArrayAccess.
      *
      * This method is needed for a full implementation of ArrayAccess
      *
      * @param  string $name
      * @return null
-     * @throws BadMethodCallException
+     * @throws \Zend\Ldap\Exception\BadMethodCallException
      */
     public function offsetUnset($name)
     {
-        throw new \BadMethodCallException();
+        throw new \Zend\Ldap\Exception\BadMethodCallException();
     }
 
     /**

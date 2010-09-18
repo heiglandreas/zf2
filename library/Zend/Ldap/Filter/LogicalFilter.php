@@ -29,7 +29,7 @@ namespace Zend\Ldap\Filter;
  * Zend_Ldap_Filter_Logical provides a base implementation for a grouping filter.
  *
  * @uses       \Zend\Ldap\Filter\AbstractFilter
- * @uses       \Zend\Ldap\Filter\Exception
+ * @uses       \Zend\Ldap\Exception\FilterException
  * @uses       \Zend\Ldap\Filter\StringFilter
  * @category   Zend
  * @package    Zend_Ldap
@@ -67,7 +67,7 @@ abstract class LogicalFilter extends AbstractFilter
         foreach ($subfilters as $key => $s) {
             if (is_string($s)) $subfilters[$key] = new StringFilter($s);
             else if (!($s instanceof AbstractFilter)) {
-                throw new Exception('Only strings or Zend\Ldap\Filter\AbstractFilter allowed.');
+                throw new \Zend\Ldap\Exception\FilterException('Only strings or Zend\Ldap\Filter\AbstractFilter allowed.');
             }
         }
         $this->_subfilters = $subfilters;

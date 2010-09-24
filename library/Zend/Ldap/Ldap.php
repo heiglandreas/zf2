@@ -276,6 +276,9 @@ class Ldap
             'useStartTls'            => false,
             'optReferrals'           => false,
             'tryUsernameSplit'       => true,
+            'connectionTimeout'      => null,
+            'queryTimeout'           => null,
+            'maxResults'             => null,
         );
 
         foreach ($permittedOptions as $key => $val) {
@@ -288,7 +291,12 @@ class Ldap
                 switch ($key) {
                     case 'port':
                     case 'accountCanonicalForm':
+                    case 'maxResults':
                         $permittedOptions[$key] = (int)$val;
+                        break;
+                    case 'conectionTimeout':
+                    case 'queryTimeout':
+                        $permittedOptions[$key] = (float)$val;
                         break;
                     case 'useSsl':
                     case 'bindRequiresDn':
@@ -370,6 +378,30 @@ class Ldap
     }
 
     /**
+     * @return float Default query-timeout
+     */
+    protected function _getQueryTimeout()
+    {
+        return (float) $this->_options['queryTimeout'];
+    }
+
+    /**
+     * @return float Default connection timeout
+     */
+    protected function _getConnectionTimeout()
+    {
+        return (float) $this->_options['connectionTimeout'];
+    }
+
+
+    /**
+     * @return int maximum number of returned results
+     */
+    protected function _getMaxResults()
+    {
+        return (int) $this->_options['maxResults'];
+    }
+    /**
      * Gets the base DN under which objects of interest are located
      *
      * @return string
@@ -412,7 +444,16 @@ class Ldap
      */
     protected function _getAccountDomainName()
     {
-        return $this->_options['accountDomainName'];
+        $domain = $this->_options['accountDomainName'];
+        if ( null === $domain ) {
+            $hostname = $this -> _getHost ();
+            $firstDot  = substr ( $hostname, '.' );
+            if ( false === $firstDot || $firstDot <= strlen ( $hostname ) ) {
+                return null;
+            }
+            $domain = substr ( $hostname, substr ( $hostname, '.' ) + 1 );
+        }
+        return $domain;
     }
 
     /**
@@ -664,12 +705,20 @@ class Ldap
      * @param  boolean $useStartTls Use STARTTLS
      * @return \Zend\Ldap\Ldap Provides a fluent interface
      * @throws \Zend\Ldap\LdapException
+     * @throws \Zend\Ldap\Exception\IOException When no connection could be established
+     *                                          to the LDAP-Server
      */
     public function connect($host = null, $port = null, $useSsl = null, $useStartTls = null)
     {
         if ($host === null) {
             $host = $this->_getHost();
         }
+
+        // Whithout a host it makes no sense to go any further!
+        if (!$host) {
+            throw new LdapException(null, 'A host parameter is required');
+        }
+
         if ($port === null) {
             $port = $this->_getPort();
         } else {
@@ -686,9 +735,14 @@ class Ldap
             $useStartTls = (bool)$useStartTls;
         }
 
-        if (!$host) {
-            throw new LdapException(null, 'A host parameter is required');
+        // Check whether we can establish a connection to the given server on
+        // the given port. If not return an IOException.
+        // This implements a FailFast-Pattern.
+        $sh = @fsockopen($host, $port, $errno, $errstr, 0.5);
+        if ( ! $sh ) {
+            throw new Exception\IOException(sprintf('Failed to connect to server %1$s on port %2$s', $host, $port ) );
         }
+        fclose($sh);
 
         $useUri = false;
         /* Because ldap_connect doesn't really try to connect, any connect error
@@ -719,23 +773,23 @@ class Ldap
          */
         $resource = ($useUri) ? @ldap_connect($this->_connectString) : @ldap_connect($host, $port);
 
-        if (is_resource($resource) === true) {
-            $this->_resource = $resource;
-            $this->_boundUser = false;
-
-            $optReferrals = ($this->_getOptReferrals()) ? 1 : 0;
-            if (@ldap_set_option($resource, LDAP_OPT_PROTOCOL_VERSION, 3) &&
-                        @ldap_set_option($resource, LDAP_OPT_REFERRALS, $optReferrals)) {
-                if ($useSsl || !$useStartTls || @ldap_start_tls($resource)) {
-                    return $this;
-                }
-            }
-
-            $zle = new LdapException($this, "$host:$port");
-            $this->disconnect();
-            throw $zle;
+        if (!is_resource($resource) === true) {
+            throw new Exception\IOException(sprintf('Failed to connect to LDAP server: %1$s:%2$s', $host, $port));
         }
-        throw new LdapException(null, "Failed to connect to LDAP server: $host:$port");
+        $this->_resource = $resource;
+        $this->_boundUser = false;
+
+        $optReferrals = ($this->_getOptReferrals()) ? 1 : 0;
+        if (@ldap_set_option($resource, LDAP_OPT_PROTOCOL_VERSION, 3) &&
+                    @ldap_set_option($resource, LDAP_OPT_REFERRALS, $optReferrals)) {
+            if ($useSsl || !$useStartTls || @ldap_start_tls($resource)) {
+                return $this;
+            }
+        }
+
+        $zle = new LdapException($this, "$host:$port");
+        $this->disconnect();
+        throw $zle;
     }
 
     /**
@@ -743,6 +797,7 @@ class Ldap
      * @param  string $password The password for authenticating the bind
      * @return \Zend\Ldap\Ldap Provides a fluent interface
      * @throws \Zend\Ldap\LdapException
+     * @throws \Zend\Ldap\Exception\IOException
      */
     public function bind($username = null, $password = null)
     {
@@ -831,6 +886,8 @@ class Ldap
      * - attributes
      * - sort
      * - collectionClass
+     * - maxResults
+     * - queryTimeout
      *
      * @param  string|\Zend\Ldap\Filter\AbstractFilter|array $filter
      * @param  string|\Zend\Ldap\Dn|null               $basedn
@@ -838,11 +895,13 @@ class Ldap
      * @param  array                                  $attributes
      * @param  string|null                            $sort
      * @param  string|null                            $collectionClass
+     * @param  int|null                               $maxResults
+     * @param  float|null                             $queryTimeout
      * @return \Zend\Ldap\Collection
      * @throws \Zend\Ldap\LdapException
      */
     public function search($filter, $basedn = null, $scope = self::SEARCH_SCOPE_SUB,
-        array $attributes = array(), $sort = null, $collectionClass = null)
+        array $attributes = array(), $sort = null, $collectionClass = null, $maxResults = null, $queryTimeout = null)
     {
         if (is_array($filter)) {
             $options = array_change_key_case($filter, CASE_LOWER);
@@ -862,6 +921,12 @@ class Ldap
                     case 'collectionclass':
                         $collectionClass = $value;
                         break;
+                    case 'maxresults':
+                        $maxResults = $value;
+                        break;
+                    case 'querytimeout':
+                        $queryTimeout = $value;
+                        break;
                 }
             }
         }
@@ -877,16 +942,21 @@ class Ldap
             $filter = $filter->toString();
         }
 
+        if(null===$queryTimeout){
+            $queryTimeout = $this->_getQueryTimeout();
+        }
+        $maxResults   = $this->_getMaxResults();
+
         switch ($scope) {
             case self::SEARCH_SCOPE_ONE:
-                $search = @ldap_list($this->getResource(), $basedn, $filter, $attributes);
+                $search = @ldap_list($this->getResource(), $basedn, $filter, $attributes, 0, $maxResults, $queryTimeout);
                 break;
             case self::SEARCH_SCOPE_BASE:
-                $search = @ldap_read($this->getResource(), $basedn, $filter, $attributes);
+                $search = @ldap_read($this->getResource(), $basedn, $filter, $attributes, 0, $maxResults, $queryTimeout);
                 break;
             case self::SEARCH_SCOPE_SUB:
             default:
-                $search = @ldap_search($this->getResource(), $basedn, $filter, $attributes);
+                $search = @ldap_search($this->getResource(), $basedn, $filter, $attributes, 0, $maxResults, $queryTimeout);
                 break;
         }
 
@@ -938,6 +1008,7 @@ class Ldap
      * @param  integer                          $scope
      * @return integer
      * @throws \Zend\Ldap\LdapException
+     * @todo   Should we implement $maxResults and $queryTimeout here as well?
      */
     public function count($filter, $basedn = null, $scope = self::SEARCH_SCOPE_SUB)
     {

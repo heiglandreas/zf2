@@ -25,33 +25,77 @@
 
                 <tbody>
                     <row>
-                        <entry><property>host</property></entry>
+                        <entry>
+                            <synopsis>
+                                <type>string</type>
+                                <property>host</property>
+                            </synopsis>
+                        </entry>
 
                         <entry>
-                            The default hostname of <acronym>LDAP</acronym> server if not
+                            The hostname of the <acronym>LDAP</acronym> server if not
                             supplied to <methodname>connect()</methodname> (also may be used
                             when trying to canonicalize usernames in
                             <methodname>bind()</methodname>).
+                            <note>The hostname has to be supplied either via the
+                            options or via the <parameter>$host</parameter>-parameter
+                            to <methodname>\Zend\Ldap\Ldap::connect()</methodname>.
+                            Otherwise no <acronym>LDAP</acronym> functionality is
+                            available</note>
                         </entry>
                     </row>
-
+                    
                     <row>
-                        <entry><property>port</property></entry>
+                        <entry>
+                            <synopsis>
+                                <type>string|\Zend\Ldap\Dn</type>
+                                <property>baseDn</property>
+                            </synopsis>
+                        </entry>
 
                         <entry>
-                            Default port of <acronym>LDAP</acronym> server if not supplied to
-                            <methodname>connect()</methodname>.
+                            The base DN used for searching (e.g., for accounts).
+                            <note>A <property>baseDn</property> has to be given either
+                            as option to the <classname>\Zend\Ldap\Ldap</classname>-constructor
+                            or to <methodname>\Zend\Ldap\Ldap::setOption()</methodname>
+                            or as parameter <parameter>$baseDn</parameter> to
+                            <methodname>\Zend\Ldap\Ldap::search()</methodname>
+                            </note>
                         </entry>
                     </row>
 
                     <row>
-                        <entry><property>useStartTls</property></entry>
+                        <entry>
+                            <synopsis>
+                                <type>int</type>
+                                <property>port</property>
+                                <initializer>389</initializer>
+                            </synopsis>
+                        </entry>
+
+                        <entry>
+                            The port of the <acronym>LDAP</acronym> server.
+                            This can also be supplied as parameter to 
+                            <methodname>\Zend\Ldap\Ldap::connect()</methodname>.
+                            If no port is suplied the default <acronym>LDAP</acronym>-Port
+                            <value>389</value> will be used.
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry>
+                            <synopsis>
+                                <type>boolean</type>
+                                <property>useStartTls</property>
+                                <initializer><constant>FALSE</constant></initializer>
+                            </synopsis>
+                        </entry>
 
                         <entry>
                             Whether or not the <acronym>LDAP</acronym> client should use
                             <acronym>TLS</acronym> (aka <acronym>SSLv2</acronym>) encrypted
                             transport. A value of <constant>TRUE</constant> is strongly favored
-                            in production environments to prevent passwords from be transmitted in
+                            in production environments to prevent passwords from being transmitted in
                             clear text. The default value is <constant>FALSE</constant>, as servers
                             frequently require that a certificate be installed separately after
                             installation. The <emphasis>useSsl</emphasis> and
@@ -63,7 +107,12 @@
                     </row>
 
                     <row>
-                        <entry><property>useSsl</property></entry>
+                        <entry>
+                            <synopsis>
+                                <type>booleany</type>
+                                <property>useSsl</property>
+                                <initializer><constant>FALSE</constant></initializer>
+                        </entry>
 
                         <entry>
                             Whether or not the <acronym>LDAP</acronym> client should use
@@ -74,10 +123,16 @@
                     </row>
 
                     <row>
-                        <entry><property>username</property></entry>
+                        <entry>
+                            <synopsis>
+                                <type>string|\Zend\Ldap\Dn</type>
+                                <property>username</property>
+                                <initializer>NULL</initializer>
+                        </entry>
 
                         <entry>
-                            The default credentials username. Some servers require that this
+                            The username for binding to an <acronym>LDAP</acronym>
+                            server. Some servers require that this
                             be in DN form. This must be given in DN form if the
                             <acronym>LDAP</acronym> server requires a DN to bind and binding
                             should be possible with simple usernames.
@@ -85,58 +140,82 @@
                     </row>
 
                     <row>
-                        <entry><property>password</property></entry>
+                        <entry>
+                            <synopsis>
+                                <type>string</type>
+                                <property>password</property>
+                                <initializer>NULL</initializer>
+                            </synopsis>
+                        </entry>
 
                         <entry>
-                            The default credentials password (used only with username
+                            The password for binding to the server (used only with username
                             above).
                         </entry>
                     </row>
 
                     <row>
-                        <entry><property>bindRequiresDn</property></entry>
+                        <entry>
+                            <synopsis>
+                                <type>boolean</type>
+                                <property>bindRequiresDn</property>
+                                <initializer><constant>FALSE</constant></initializer>
+                            </synopsis>
+                        </entry>
 
                         <entry>
                             If <constant>TRUE</constant>, this instructs
                             <classname>\Zend\Ldap\Ldap</classname> to retrieve the DN for the
                             account used to bind if the username is not
-                            already in DN form. The default value is <constant>FALSE</constant>.
+                            already in DN form.
                         </entry>
                     </row>
 
                     <row>
-                        <entry><property>baseDn</property></entry>
-
                         <entry>
-                            The default base DN used for searching (e.g., for accounts).
-                            This option is required for most account related operations and should
-                            indicate the DN under which accounts are located.
+                            <synopsis>
+                                <type>integer</type>
+                                <property>accountCanonicalForm</property>
+                                <initializer>NULL</initializer>
+                            </synopsis>
                         </entry>
-                    </row>
-
-                    <row>
-                        <entry><property>accountCanonicalForm</property></entry>
 
                         <entry>
                             A small integer indicating the form to which account names
-                            should be canonicalized. See the <link
-                                linkend="zend.ldap.introduction.theory-of-operations.account-name-canonicalization"><emphasis>Account
-                                Name Canonicalization</emphasis></link>
+                            should be canonicalized. See the 
+                            <link linkend="zend.ldap.introduction.theory-of-operations.account-name-canonicalization">
+                                <emphasis>Account Name Canonicalization</emphasis>
+                            </link>
                             section below.
                         </entry>
                     </row>
 
                     <row>
-                        <entry><property>accountDomainName</property></entry>
+                        <entry>
+                            <synopsis>
+                                <type>string</type>
+                                <property>accountDomainName</property>
+                            </synopsis>
+                        </entry>
 
                         <entry>
                             The <acronym>FQDN</acronym> domain for which the target
                             <acronym>LDAP</acronym> server is an authority (e.g., example.com).
+                            If this is not given, the FQDN will be guessed by
+                            removing the server-name from the <propert>host</propert>-option.
+                            So when a server name of <emphasis>ldap.example.com</emphasis> is given,
+                            the accountDomainName would be guessed as <emphasis>example.com</emphasis>
                         </entry>
                     </row>
 
                     <row>
-                        <entry><property>accountDomainNameShort</property></entry>
+                        <entry>
+                            <synopsis>
+                                <type>string</type>
+                                <property>accountDomainNameShort</property>
+                                <initializer>NULL</initializer>
+                            </synopsis>
+                        </entry>
 
                         <entry>
                             The 'short' domain for which the target <acronym>LDAP</acronym> server
@@ -146,12 +225,17 @@
                     </row>
 
                     <row>
-                        <entry><property>accountFilterFormat</property></entry>
+                        <entry>
+                            <synopsis>
+                                <type>string</type>
+                                <property>accountFilterFormat</property>
+                            </synopsis>
+                        </entry>
 
                         <entry>
                             The <acronym>LDAP</acronym> search filter used to search for accounts.
-                            This string is a <ulink
-                                url="http://php.net/sprintf"><methodname>sprintf()</methodname></ulink>
+                            This string is a <ulink url="http://php.net/sprintf">
+                            <methodname>sprintf()</methodname></ulink>
                             style expression that must contain one '<emphasis>%s</emphasis>' to
                             accommodate the username. The default value is
                             '<emphasis>(&amp;(objectClass=user)(sAMAccountName=%s))</emphasis>'
@@ -163,7 +247,13 @@
                     </row>
 
                     <row>
-                        <entry><property>allowEmptyPassword</property></entry>
+                        <entry>
+                            <synopsis>
+                                <type>boolean</type>
+                                <property>allowEmptyPassword</property>
+                                <initializer><constant>FALSE</constant></initializer>
+                            </synopsis>
+                        </entry>
 
                         <entry>
                             Some <acronym>LDAP</acronym> servers can be configured to accept an
@@ -175,7 +265,13 @@
                     </row>
 
                     <row>
-                        <entry><property>optReferrals</property></entry>
+                        <entry>
+                            <synopsis>
+                                <type>boolean</type>
+                                 <property>optReferrals</property>
+                                 <initializer><constant>FALSE</constant></initializer>
+                             </synopsis>
+                         </entry>
 
                         <entry>
                             If set to <constant>TRUE</constant>, this option indicates to the
@@ -185,7 +281,13 @@
                     </row>
 
                     <row>
-                        <entry><property>tryUsernameSplit</property></entry>
+                        <entry>
+                            <synopsis>
+                                <type>boolean</type>
+                                <property>tryUsernameSplit</property>
+                                <initializer><constant>TRUE</constant></initializer>
+                            </synopsis>
+                        </entry>
 
                         <entry>
                             If set to <constant>FALSE</constant>, this option indicates that the

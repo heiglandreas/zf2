@@ -4,7 +4,7 @@
     <title>\Zend\Ldap\Ldap</title>
 
     <para>
-        <classname>\Zend\Ldap\Ldap</classname> is the base interface into a <acronym>LDAP</acronym>
+        <classname>\Zend\Ldap\Ldap</classname> is the base interface into an <acronym>LDAP</acronym>
         server. It provides connection and binding methods as well as methods to operate on the
         <acronym>LDAP</acronym> tree.
     </para>
@@ -22,34 +22,18 @@
 
             <tbody>
                 <row>
-                    <entry><code>string filterEscape(string $str)</code></entry>
-
                     <entry>
-                        Escapes a value to be used in a <acronym>LDAP</acronym> filter according to
-                        <acronym>RFC</acronym> 2254. This method is <emphasis>deprecated</emphasis>,
-                        please use <methodname>\Zend\Ldap\Filter_Abstract::escapeValue()</methodname>
-                        instead.
+                        <constructorsynopsis>
+                            <methodname>__construct</methodname>
+                            (
+                            <methodparam>
+                                <type>array|\Zend\Config\config</type>
+                                <parameter>$options</parameter>
+                                <initializer>array()</initializer>
+                            </methodparam>
+                            )
+                        </constructorsynopsis>
                     </entry>
-                </row>
-
-                <row>
-                    <entry>
-                        <code>boolean explodeDn($dn, array &amp;$keys = null, array &amp;$vals =
-                            null)</code>
-                    </entry>
-
-                    <entry>
-                        Checks if a given DN <varname>$dn</varname> is malformed. If
-                        <varname>$keys</varname> or <varname>$keys</varname> and
-                        <varname>$vals</varname> are given, these arrays will be filled with the
-                        appropriate DN keys and values. This method is
-                        <emphasis>deprecated</emphasis>, please use
-                        <methodname>\Zend\Ldap\Dn::checkDn()</methodname> instead.
-                    </entry>
-                </row>
-
-                <row>
-                    <entry><methodname>__construct($options)</methodname></entry>
 
                     <entry>
                         Constructor. The <varname>$options</varname> parameter is optional
@@ -64,7 +48,13 @@
                 </row>
 
                 <row>
-                    <entry><code>resource getResource()</code></entry>
+                    <entry>
+                        <methodsynopsis>
+                            <type>resource</type>
+                            <methodname>getResource</methodname>
+                            (<void/>)
+                        </methodsynopsis>
+                    </entry>
 
                     <entry>
                         Returns the raw <acronym>LDAP</acronym> extension (ext/ldap) resource.
@@ -72,7 +62,13 @@
                 </row>
 
                 <row>
-                    <entry><code>integer getLastErrorCode()</code></entry>
+                    <entry>
+                        <methodsynopsis>
+                            <type>integer</type>
+                            <methodname>getLastErrorCode</methodname>
+                            (<void/>)
+                        </methodsynopsis>
+                    </entry>
 
                     <entry>
                         Returns the <acronym>LDAP</acronym> error number of the last
@@ -82,8 +78,22 @@
 
                 <row>
                     <entry>
-                        <code>string getLastError(integer &amp;$errorCode, array
-                            &amp;$errorMessages)</code>
+                        <methodsynopsis>
+                            <type>string</type>
+                            <methodname>getLastError</methodname>
+                            (
+                            <methodparam>
+                                <type>integer</type>
+                                <parameter>&amp;$errorCode</parameter>
+                                <initializer>null</initializer>
+                            </methodparam>,
+                            <methodparam>
+                                <type>array</type>
+                                <parameter>&amp;$errorMessages</parameter>
+                                <initializer>null</initializer>
+                            </methodparam>
+                            )
+                        </methodsynopsis>
                     </entry>
 
                     <entry>
@@ -98,7 +108,18 @@
                 </row>
 
                 <row>
-                    <entry><code>\Zend\Ldap\Ldap setOptions($options)</code></entry>
+                    <entry>
+                        <methodsynopsis>
+                            <type>\Zend\Ldap\Ldap</type>
+                            <methodname>setOptions</methodname>
+                            (
+                            <methodparam>
+                                <type>array|\Zend\Config\Config</type>
+                                <parameter>$options</parameter>
+                            </methodparam>
+                            )
+                        </methodsynopsis>
+                    </entry>
 
                     <entry>
                         Sets the <acronym>LDAP</acronym> connection and binding parameters.
@@ -110,12 +131,24 @@
                 </row>
 
                 <row>
-                    <entry><code>array getOptions()</code></entry>
+                    <entry>
+                        <methodsynopsis>
+                            <type>array</type>
+                            <methodname>getOptions</methodname>
+                            (<void/>)
+                        </methodsynopsis>
+                    </entry>
                     <entry>Returns the current connection and binding parameters.</entry>
                 </row>
 
                 <row>
-                    <entry><code>string getBaseDn()</code></entry>
+                    <entry>
+                        <methodsynopsis>
+                            <type>string</type>
+                            <methodname>getBaseDn</methodname>
+                            (<void/>)
+                        </methodsynopsis>
+                    </entry>
 
                     <entry>
                         Returns the base DN this <acronym>LDAP</acronym> connection is bound
@@ -125,7 +158,21 @@
 
                 <row>
                     <entry>
-                        <code>string getCanonicalAccountName(string $acctname, integer $form)</code>
+                        <methodsynopsis>
+                            <type>string</type>
+                            <methodname>getCanonicalAccountName</methodname>
+                            (
+                            <methodparam>
+                                <type>string</type>
+                                <parameter>$acctname</parameter>
+                            </methodparam>,
+                            <methodparam>
+                                <type>integer</type>
+                                <parameter>$form</parameter>
+                                <initializer>0</initializer>
+                            </methodparam>
+                            )
+                        </methodsynopsis>
                     </entry>
 
                     <entry>
@@ -139,7 +186,13 @@
                 </row>
 
                 <row>
-                    <entry><code>\Zend\Ldap\Ldap disconnect()</code></entry>
+                    <entry>
+                        <methodsynopsis>
+                            <type>\Zend\Ldap\Ldap</type>
+                            <methodname>disconnect</methodname>
+                            (<void/>)
+                        </methodsynopsis>
+                    </entry>
 
                     <entry>
                         Disconnects the <classname>\Zend\Ldap\Ldap</classname> instance from the
@@ -149,8 +202,32 @@
 
                 <row>
                     <entry>
-                        <code>\Zend\Ldap\Ldap connect(string $host, integer $port, boolean $useSsl,
-                            boolean $useStartTls)</code>
+                        <methodsynopsis>
+                            <type>\Zend\Ldap\Ldap</type>
+                            <methodname>connect</methodname>
+                            (
+                            <methodparam>
+                                <type>string</type>
+                                <parameter>$host</parameter>
+                                <initializer>null</initializer>
+                            </methodparam>,
+                            <methodparam>
+                                <type>integer</type>
+                                <parameter>$port</parameter>
+                                <initializer>null</initializer>
+                            </methodparam>,
+                            <methodparam>
+                                <type>boolean</type>
+                                <parameter>$useSsl</parameter>
+                                <initializer>null</initializer>
+                            </methodparam>,
+                            <methodparam>
+                                <type>boolean</type>
+                                <parameter>$useStartTls</parameter>
+                                <initializer>null</initializer>
+                            </methodparam>
+                            )
+                        </methodsynopsis>
                     </entry>
 
                     <entry>
@@ -165,7 +242,22 @@
 
                 <row>
                     <entry>
-                        <code>\Zend\Ldap\Ldap bind(string $username, string $password)</code>
+                        <methodsynopsis>
+                            <type>\Zend\Ldap\Ldap</type>
+                            <methodname>bind</methodname>
+                            (
+                            <methodparam>
+                                <type>string</type>
+                                <parameter>$username</parameter>
+                                <initializer>null</initializer>
+                            </methodparam>,
+                            <methodparam>
+                                <type>string</type>
+                                <parameter>$password</parameter>
+                                <initializer>null</initializer>
+                            </methodparam>
+                            )
+                        </methodsynopsis>
                     </entry>
 
                     <entry>
@@ -184,9 +276,51 @@
 
                 <row>
                     <entry>
-                        <code>\Zend\Ldap\Collection search(string|\Zend\Ldap\Filter_Abstract $filter,
-                            string|\Zend\Ldap\Dn $basedn, integer $scope, array $attributes, string
-                            $sort, string $collectionClass)</code>
+                        <methodsynopsis>
+                            <type>\Zend\Ldap\Collection</type>
+                            <methodname>search</methodname>
+                            (
+                            <methodparam>
+                                <type>string|\Zend\Ldap\Filter_Abstract</type>
+                                <parameter>$filter</parameter>
+                            </methodparam>,
+                            <methodparam>
+                                <type>string|\Zend\Ldap\Dn</type>
+                                <parameter>$basedn</parameter>
+                                <initializer>null</initializer>
+                            </methodparam>,
+                            <methodparam>
+                                <type>integer</type>
+                                <parameter>$scope</parameter>
+                                <initializer>\Zend\Ldap\Ldap::SEARCH_SCOPE_SUB</initializer>
+                            </methodparam>,
+                            <methodparam>
+                                <tpye>array</tpye>
+                                <parameter>$attributes</parameter>
+                                <initializer>array()</initializer>
+                            </methodparam>,
+                            <methodparam>
+                                <type>string</type>
+                                <parameter>$sort</parameter>
+                                <initializer>null</initializer>
+                            </methodparam>,
+                            <methodparam>
+                                <type>string</type>
+                                <parameter>$collectionClass</parameter>
+                                <initializer>null</initializer>
+                            </methodparam>,
+                            <methodparam>
+                                <type>int</type>
+                                <parameter>$maxResults</parameter>
+                                <initializer>null</initializer>
+                            </methodparam>,
+                            <methodparam>
+                                <type>float</type>
+                                <parameter>$queryTimeout</parameter>
+                                <initializer>null</initializer>
+                            </methodparam>
+                            )
+                        </methodsynopsis>
                     </entry>
 
                     <entry>
@@ -194,94 +328,172 @@
                         <varname>$filter</varname> and the given search parameters.
 
                         <variablelist>
+                            <title>Parameter-Description</title>
                             <varlistentry>
-                                <term><code>string|\Zend\Ldap\Filter_Abstract $filter</code></term>
-
+                                <term>
+                                    <synopsis>
+                                        <type>string|\Zend\Ldap\Filter_Abstract</type>
+                                        <parameter>$filter</parameter>
+                                    </synopsis>
+                                </term>
                                 <listitem>
-                                    <para>
-                                        The filter string to be used in the search, e.g.
-                                        <code>(objectClass=posixAccount)</code>.
-                                    </para>
+                                    The filter to be used in the search, e.g.
+                                    <code>(objectClass=posixAccount)</code>.
                                 </listitem>
                             </varlistentry>
 
                             <varlistentry>
-                                <term><code>string|\Zend\Ldap\Dn $basedn</code></term>
+                                <term>
+                                    <synopsis>
+                                        <type>string|\Zend\Ldap\Dn</type>
+                                        <parameter>$basedn</parameter>
+                                        <initializer>null</initializer>
+                                    </synopsis>
+                                </term>
 
                                 <listitem>
-                                    <para>
-                                        The search base for the search. If omitted or
-                                        <constant>NULL</constant>, the <code>baseDn</code> from the
-                                        connection and binding parameters is used.
-                                    </para>
+                                    The search base for the search. If omitted or
+                                    <constant>NULL</constant>, the <code>baseDn</code> from the
+                                    connection and binding parameters is used.
                                 </listitem>
                             </varlistentry>
 
                             <varlistentry>
-                                <term><code>integer $scope</code></term>
+                                <term>
+                                    <synopsis>
+                                        <type>integer</type>
+                                        <parmeter>$scope</parmeter>
+                                        <initializer>\Zend\Ldap\Ldap::SEARCH_SCOPE_SUB</initializer>
+                                    </synopsis>
+                                </term>
 
                                 <listitem>
-                                    <para>
-                                        The search scope.
-                                        <constant>\Zend\Ldap\Ldap::SEARCH_SCOPE_SUB</constant> searches
-                                        the complete subtree including the
-                                        <varname>$baseDn</varname> node.
-                                        <constant>\Zend\Ldap\Ldap::SEARCH_SCOPE_ONE</constant> restricts
-                                        search to one level below <varname>$baseDn</varname>.
-                                        <constant>\Zend\Ldap\Ldap::SEARCH_SCOPE_BASE</constant> restricts
-                                        search to the <varname>$baseDn</varname> itself; this can be
-                                        used to efficiently retrieve a single entry by its DN. The
-                                        default value is
-                                        <constant>\Zend\Ldap\Ldap::SEARCH_SCOPE_SUB</constant>.
-                                    </para>
+                                    The search scope.
+                                    <itemizedlist>
+                                        <listitem>
+                                            <constant>\Zend\Ldap\Ldap::SEARCH_SCOPE_SUB</constant>
+                                            searches the complete subtree including the
+                                            <varname>$baseDn</varname> node.
+                                        </listitem>
+                                        <listitem>
+                                            <constant>\Zend\Ldap\Ldap::SEARCH_SCOPE_ONE</constant> restricts
+                                            search to one level below <varname>$baseDn</varname>.
+                                        </listitem>
+                                        <listitem>
+                                            <constant>\Zend\Ldap\Ldap::SEARCH_SCOPE_BASE</constant> restricts
+                                            search to the <varname>$baseDn</varname> itself; this can be
+                                            used to efficiently retrieve a single entry by its DN.
+                                        </listitem>
+                                    </itemizedlist>
+                                    The default value is
+                                    <constant>\Zend\Ldap\Ldap::SEARCH_SCOPE_SUB</constant>.
                                 </listitem>
                             </varlistentry>
 
                             <varlistentry>
-                                <term><code>array $attributes</code></term>
+                                <term>
+                                    <synopsis>
+                                        <type>array</type>
+                                        <parameter>$attributes</parameter>
+                                        <initializer>array()</initializer>
+                                    </synopsis>
+                                </term>
 
                                 <listitem>
-                                    <para>
-                                        Specifies the attributes contained in the
-                                        returned entries. To include all possible attributes (ACL
-                                        restrictions can disallow certain attribute to be retrieved
-                                        by a given user) pass either an empty array
-                                        <methodname>array()</methodname> or
-                                        <methodname>array('*')</methodname> to the method. On some
-                                        <acronym>LDAP</acronym> servers you can retrieve special
-                                        internal attributes by passing
-                                        <methodname>array('*', '+')</methodname> to the method.
-                                    </para>
+                                    Specifies the attributes contained in the
+                                    returned entries. To include all possible attributes (ACL
+                                    restrictions can disallow certain attribute to be retrieved
+                                    by a given user) pass either an empty array
+                                    <code>array()</code> or
+                                    <code>array('*')</code> to the method. On some
+                                    <acronym>LDAP</acronym> servers you can retrieve special
+                                    internal attributes by passing
+                                    <code>array('*', '+')</code> to the method.
                                 </listitem>
                             </varlistentry>
 
                             <varlistentry>
-                                <term><code>string $sort</code></term>
+                                <term>
+                                    <synopsis>
+                                        <type>string</type>
+                                        <parameter>$sort</parameter>
+                                        <initializer>null</initializer>
+                                    </synopsis>
+                                </term>
 
                                 <listitem>
-                                    <para>
-                                        If given the result collection will be sorted after the
-                                        attribute <varname>$sort</varname>. Results can only be
-                                        sorted after one single attribute as this parameter uses
-                                        the ext/ldap function <methodname>ldap_sort()</methodname>.
-                                    </para>
+                                    If given the result collection will be sorted after the
+                                    attribute <varname>$sort</varname>. Results can only be
+                                    sorted after one single attribute as this parameter uses
+                                    the ext/ldap function <methodname>ldap_sort()</methodname>.
                                 </listitem>
                             </varlistentry>
 
                             <varlistentry>
-                                <term><code>string $collectionClass</code></term>
+                                <term>
+                                    <synopsis>
+                                        <type>string</type>
+                                        <parameter>$collectionClass</parameter>
+                                        <initializer>null</initializer>
+                                    </synopsis>
+                                </term>
 
                                 <listitem>
-                                    <para>
-                                        If given the result will be wrapped in an object of type
-                                        <varname>$collectionClass</varname>. By default an object
-                                        of type <classname>\Zend\Ldap\Collection</classname> will be
-                                        returned. The custom class must extend
-                                        <classname>\Zend\Ldap\Collection</classname> and will be
-                                        passed a
-                                        <classname>\Zend\Ldap\Collection\Iterator\Default</classname>
-                                        on instantiation.
-                                    </para>
+                                    If given the result will be wrapped in an object of type
+                                    <varname>$collectionClass</varname>. By default an object
+                                    of type <classname>\Zend\Ldap\Collection</classname> will be
+                                    returned. The custom class must extend
+                                    <classname>\Zend\Ldap\Collection</classname> and will be
+                                    passed a
+                                    <classname>\Zend\Ldap\Collection\Iterator\Default</classname>
+                                    on instantiation.
+                                </listitem>
+                            </varlistentry>
+
+                            <varlistentry>
+                                <term>
+                                    <synopsis>
+                                        <type>int</type>
+                                        <parameter>$maxResults</parameter>
+                                        <initializer>null</initializer>
+                                    </synopsis>
+                                </term>
+                                <listitem>
+                                    If given only the given number of results
+                                    will be retrieved from the <acronym>LDAP</acronym>-Server.
+
+                                    Passing a <constant>NULL</constant>-value will use
+                                    <methodname>getMaxResults()</methodname> to
+                                    get a value.
+
+                                    If no value at all is given, no limit will be set.
+                                    <note>
+                                        This will not circumvent any limit
+                                        that is implemented on the server-side!
+                                    </note>
+                                    <note>
+                                        Not setting <varname>$maxResults</varname>
+                                        might lead to an awfull lot of results.
+                                    </note>
+                                </listitem>
+                            </varlistentry>
+
+                            <varlistentry>
+                                <term>
+                                    <synopsis>
+                                        <type>float</type>
+                                        <parameter>$queryTimeout</parameter>
+                                        <initializer>null</initializer>
+                                    </synopsis>
+                                </term>
+                                <listitem>
+                                    After the given number of seconds the query
+                                    will timeout and throw a <classname>\Zend\Ldap\Exception\IOException</classname>
+                                    Passing a <constant>NULL</constant>-value will use the
+                                    <varname>queryTimeout</varname> set with the configuration
+                                    of the instance or set via <methodname>setQueryTimeout()</methodname>
+                                    If no value at all is given the method will wait indefinitely for a response.
+
                                 </listitem>
                             </varlistentry>
                         </variablelist>
@@ -290,9 +502,26 @@
 
                 <row>
                     <entry>
-                        <code>integer count(string|\Zend\Ldap\Filter_Abstract
-                        $filter, string|\Zend\Ldap\Dn $basedn, integer
-                        $scope)</code>
+                        <methodsynopsis>
+                            <type>integer</type>
+                            <methodname>count</methodname>
+                            (
+                            <methodparam>
+                                <type>string|\Zend\Ldap\Filter_Abstract</type>
+                                <parameter>$filter</parameter>
+                            </methodparam>,
+                            <methodparam>
+                                <type>string|\Zend\Ldap\Dn</type>
+                                <parameter>$basedn</parameter>
+                                <initializer>null</initializer>
+                            </methodparam>,
+                            <methodparam>
+                                <type>integer</type>
+                                <parameter>$scope</parameter>
+                                <initializer>\Zend\Ldap\Ldap::SEARCH_SCOPE_SUB</initializer>
+                            </methodparam>
+                            )
+                        </methodsynopsis>
                     </entry>
 
                     <entry>
@@ -303,7 +532,18 @@
                 </row>
 
                 <row>
-                    <entry><code>integer countChildren(string|\Zend\Ldap\Dn $dn)</code></entry>
+                    <entry>
+                        <methodsynopsis>
+                            <type>integer</type>
+                            <methodname>countChildren</methodname>
+                            (
+                            <methodparam>
+                                <type>string|\Zend\Ldap\Dn</type>
+                                <parameter>$dn</parameter>
+                            </methodparam>
+                             )
+                         </methodsynopsis>
+                     </entry>
 
                     <entry>
                         Counts the direct descendants (children) of the entry
@@ -312,7 +552,18 @@
                 </row>
 
                 <row>
-                    <entry><code>boolean exists(string|\Zend\Ldap\Dn $dn)</code></entry>
+                    <entry>
+                        <methodsynopsis>
+                            <type>boolean</type>
+                            <methodname>exists</methodname>
+                            (
+                            <methodparam>
+                                <type>string|\Zend\Ldap\Dn</type>
+                                <parameter>$dn</parameter>
+                            </methodparam>
+                            )
+                        </methodsynopsis>
+                    </entry>
 
                     <entry>
                         Checks whether the entry identified by the given
@@ -322,13 +573,45 @@
 
                 <row>
                     <entry>
-                        <code>array searchEntries(string|\Zend\Ldap\Filter\Abstract
-                        $filter, string|\Zend\Ldap\Dn $basedn, integer $scope, array
-                        $attributes, string $sort)</code>
+                        <methodsynopsis>
+                            <type>array</type>
+                            <methodname>searchEntries</methodname>
+                            (
+                            <methodparam>
+                                <type>string|\Zend\Ldap\Filter\Abstract</type>
+                                <parameter>$filter</parameter>
+                            </methodparam>,
+                            <methodparam>
+                                <type>string|\Zend\Ldap\Dn</type>
+                                <parameter>$basedn</parameter>
+                                <initializer>null</initializer>
+                            </methodparam>,
+                            <methodparam>
+                                <type>integer</type>
+                                <parameter>$scope</parameter>
+                                <initializer>\Zend\Ldap\Ldap::SEARCH_SCOPE_SUB</initializer>
+                            </methodparam>,
+                            <methodparam>
+                                <type>array</type>
+                                <parameter>$attributes</parameter>
+                                <initialiter>array()</initialiter>
+                            </methodparam>,
+                            <methodparam>
+                                <type>string</type>
+                                <parameter>$sort</parameter>
+                                <initializer>null</initializer>
+                            </methodparam>,
+                            <methodparam>
+                                <type>boolean</type>
+                                <parameter>$reverseSort</parameter>
+                                <initializer>false</initializer>
+                            </methodparam>
+                            )
+                        </methodsynopsis>
                     </entry>
 
                     <entry>
-                        Performs a search operation and returns the result as an
+                        Performs a search operation and returns the result as a
                         <acronym>PHP</acronym> array. This is essentially the same method as
                         <methodname>\Zend\Ldap\Ldap::search()</methodname> except for the return type. See
                         <methodname>\Zend\Ldap\Ldap::search()</methodname> for a detailed description of
@@ -338,27 +621,53 @@
 
                 <row>
                     <entry>
-                        <code>array getEntry(string|\Zend\Ldap\Dn $dn, array
-                        $attributes, boolean $throwOnNotFound)</code>
+                        <methodsynopsis>
+                            <type>array</type>
+                            <methodname>getEntry</methodname>
+                            (
+                            <methodparam>
+                                <type>string|\Zend\Ldap\Dn</type>
+                                <parameter>$dn</parameter>
+                            </methodparam>,
+                            <methodparam>
+                                <type>array</type>
+                                <parameter>$attributes</parameter>
+                                <initializer>array()</initializer>
+                            </methodparam>,
+                            <methodparam>
+                                <type>boolean</type>
+                                <parameter>$throwOnNotFound</parameter>
+                                <initializer>false</initializer>
+                            </methodparam>
+                            )
+                        </methodsynopsis>
                     </entry>
 
                     <entry>
                         Retrieves the <acronym>LDAP</acronym> entry identified by
                         <varname>$dn</varname> with the attributes specified in
-                        <varname>$attributes</varname>. if <varname>$attributes</varname> is
+                        <varname>$attributes</varname>. If <varname>$attributes</varname> is
                         ommitted, all attributes (<methodname>array()</methodname>) are included in
                         the result. <varname>$throwOnNotFound</varname> is
                         <constant>FALSE</constant> by default, so the method will return
                         <constant>NULL</constant> if the specified entry cannot be found. If set to
-                        <constant>TRUE</constant>, a <classname>\Zend\Ldap\Exception</classname> will
+                        <constant>TRUE</constant>, a <classname>\Zend\Ldap\LdapException</classname> will
                         be thrown instead.
                     </entry>
                 </row>
 
                 <row>
                     <entry>
-                        <emphasis><code>void prepareLdapEntryArray(array
-                            &amp;$entry)</code></emphasis>
+                        <methodsynopsis>
+                            <type>void</type>
+                            <methodname>prepareLdapEntryArray</methodname>
+                            (
+                            <methodparam>
+                                <type>array</type>
+                                <parameter>&amp;$entry</parameter>
+                            </methodparam>
+                            )
+                        </methodsynopsis>
                     </entry>
 
                     <entry>
@@ -371,21 +680,46 @@
 
                 <row>
                     <entry>
-                        <code>\Zend\Ldap\Ldap add(string|\Zend\Ldap\Dn $dn, array
-                        $entry)</code>
+                        <methodsynopsis>
+                            <type>\Zend\Ldap\Ldap</type>
+                            <methodname>add</methodname>
+                            (
+                            <methodparam>
+                                <type>string|\Zend\Ldap\Dn</type>
+                                <parameter>$dn</parameter>
+                            </methodparam>,
+                            <methodparam>
+                                <type>array</type>
+                                <parameter>$entry</parameter>
+                            </methodparam>
+                            )
+                        </methodsynopsis>
                     </entry>
 
                     <entry>
                         Adds the entry identified by <varname>$dn</varname> with its attributes
                         <varname>$entry</varname> to the <acronym>LDAP</acronym> tree. Throws a
-                        <classname>\Zend\Ldap\Exception</classname> if the entry could not be
+                        <classname>\Zend\Ldap\LdapException</classname> if the entry could not be
                         added.
                     </entry>
                 </row>
 
                 <row>
                     <entry>
-                        <code>\Zend\Ldap\Ldap update(string|\Zend\Ldap\Dn $dn, array $entry)</code>
+                        <methodsynopsis>
+                            <type>\Zend\Ldap\Ldap</type>
+                            <methodname>update</methodname>
+                            (
+                            <methodparam>
+                                <type>string|\Zend\Ldap\Dn</type>
+                                <parameter>$dn</parameter>
+                            </methodparam>,
+                            <methodparam>
+                                <type>array</type>
+                                <parameter>$entry</parameter>
+                            </methodparam>
+                            )
+                        </methodsynopsis>
                     </entry>
 
                     <entry>
@@ -398,13 +732,26 @@
 
                 <row>
                     <entry>
-                        <code>\Zend\Ldap\Ldap save(string|\Zend\Ldap\Dn $dn, array $entry)</code>
+                        <methodsynopsis>
+                            <type>\Zend\Ldap\Ldap</type>
+                            <methodname>save</methodname>
+                            (
+                            <methodparam>
+                                <type>string|\Zend\Ldap\Dn</type>
+                                <parameter>$dn</parameter>
+                            </methodparam>,
+                            <methodparam>
+                                <type>array</type>
+                                <parameter>$entry</parameter>
+                            </methodparam>
+                            )
+                        </methodsynopsis>
                     </entry>
 
                     <entry>
                         Saves the entry identified by <varname>$dn</varname> with its attributes
                         <varname>$entry</varname> to the <acronym>LDAP</acronym> tree. Throws a
-                        <classname>\Zend\Ldap\Exception</classname> if the entry could not be saved.
+                        <classname>\Zend\Ldap\LdapException</classname> if the entry could not be saved.
                         This method decides by querying the <acronym>LDAP</acronym> tree if the
                         entry will be added or updated.
                     </entry>
@@ -412,13 +759,27 @@
 
                 <row>
                     <entry>
-                        <code>\Zend\Ldap\Ldap delete(string|\Zend\Ldap\Dn $dn, boolean $recursively)</code>
+                        <methodsynopsis>
+                            <type>\Zend\Ldap\Ldap</type>
+                            <methodname>delete</methodname>
+                            (
+                            <methodparam>
+                                <type>string|\Zend\Ldap\Dn</type>
+                                <parameter>$dn</parameter>
+                            </methodparam>,
+                            <methodparam>
+                                <type>boolean</type>
+                                <parameter>$recursively</parameter>
+                                <initializer><constant>FALSE</constant></initializer>
+                            </methodparam>
+                            )
+                        </methodsynopsis>
                     </entry>
 
                     <entry>
                         Deletes the entry identified by <varname>$dn</varname> from the
                         <acronym>LDAP</acronym> tree. Throws a
-                        <classname>\Zend\Ldap\Exception</classname> if the entry could not be
+                        <classname>\Zend\Ldap\LdapException</classname> if the entry could not be
                         deleted. <varname>$recursively</varname> is <constant>FALSE</constant> by
                         default. If set to <constant>TRUE</constant> the deletion will be carried
                         out recursively and will effectively delete a complete subtree. Deletion
@@ -429,9 +790,30 @@
 
                 <row>
                     <entry>
-                        <code>\Zend\Ldap\Ldap moveToSubtree(string|\Zend\Ldap\Dn $from,
-                        string|\Zend\Ldap\Dn $to, boolean $recursively, boolean
-                        $alwaysEmulate)</code>
+                        <methodsynopsis>
+                            <type>\Zend\Ldap\Ldap</type>
+                            <methodname>moveToSubtree</methodname>
+                            (
+                            <methodparam>
+                                <type>string|\Zend\Ldap\Dn</type>
+                                <parameter>$from</parameter>
+                            </methodparam>,
+                            <methodparam>
+                                <type>string|\Zend\Ldap\Dn</type>
+                                <parameter>$to</parameter>
+                            </methodparam>,
+                            <methodparam>
+                                <type>boolean</type>
+                                <parameter>$recursively</parameter>
+                                <initializer><constant>FALSE</constant></initializer>
+                            </methodparam>,
+                            <methodparam>
+                                <type>boolean</type>
+                                <parameter>$alwaysEmulate</parameter>
+                                <initializer><constant>FALSE</constant></initializer>
+                            </methodparam>
+                            )
+                        </methodsynopsis>
                     </entry>
 
                     <entry>
@@ -449,25 +831,44 @@
                         emulated rename operation.
 
                         <note>
-                            <para>
-                                All move-operations are carried out by copying and then deleting the
-                                corresponding entries in the <acronym>LDAP</acronym> tree. These
-                                operations are not <emphasis>atomic</emphasis> so that failures
-                                during the operation will result in an
-                                <emphasis>inconsistent</emphasis> state on the
-                                <acronym>LDAP</acronym> server. The same is true for all recursive
-                                operations. They also are by no means atomic. Please keep this in
-                                mind.
-                            </para>
+                            All move-operations are carried out by copying and then deleting the
+                            corresponding entries in the <acronym>LDAP</acronym> tree. These
+                            operations are <emphasis role="strong">not</emphasis> <emphasis>atomic</emphasis> so that failures
+                            during the operation will result in an
+                            <emphasis>inconsistent</emphasis> state on the
+                            <acronym>LDAP</acronym> server. The same is true for all recursive
+                            operations. They also are by no means atomic. Please keep this in
+                            mind.
                         </note>
                     </entry>
                 </row>
 
                 <row>
                     <entry>
-                        <code>\Zend\Ldap\Ldap move(string|\Zend\Ldap\Dn $from,
-                        string|\Zend\Ldap\Dn $to, boolean $recursively, boolean
-                        $alwaysEmulate)</code>
+                        <methodsynopsis>
+                            <type>\Zend\Ldap\Ldap</type>
+                            <methodname>move</methodname>
+                            (
+                            <methodparam>
+                                <type>string|\Zend\Ldap\Dn</type>
+                                <parameter>$from</parameter>
+                            </methodparam>,
+                            <methodparam>
+                                <type>string|\Zend\Ldap\Dn</type>
+                                <parameter>$to</parameter>
+                            </methodparam>,
+                            <methodparam>
+                                <type>boolean</type>
+                                <parameter>$recursively</parameter>
+                                <initializer><constant>FALSE</constant></initializer>
+                            </methodparam>,
+                            <methodparam>
+                                <type>boolean</type>
+                                <parameter>$alwaysEmulate</parameter>
+                                <initializer><constant>FALSE</constant></initializer>
+                            </methodparam>
+                            )
+                        </methodsynopsis>
                     </entry>
 
                     <entry>
@@ -477,9 +878,30 @@
 
                 <row>
                     <entry>
-                        <code>\Zend\Ldap\Ldap rename(string|\Zend\Ldap\Dn $from,
-                        string|\Zend\Ldap\Dn $to, boolean $recursively, boolean
-                        $alwaysEmulate)</code>
+                        <methodsynopsis>
+                            <type>\Zend\Ldap\Ldap</type>
+                            <methodname>rename</methodname>
+                            (
+                            <methodparam>
+                                <type>string|\Zend\Ldap\Dn</type>
+                                <parameter>$from</parameter>
+                            </methodparam>,
+                            <methodparam>
+                                <type>string|\Zend\Ldap\Dn</type>
+                                <parameter>$to</parameter>
+                            </methodparam>,
+                            <methodparam>
+                                <type>boolean</type>
+                                <parameter>$recursively</parameter>
+                                <initializer><constant>FALSE</constant></initializer>
+                            </methodparam>,
+                            <methodparam>
+                                <type>boolean</type>
+                                <parameter>$alwaysEmulate</parameter>
+                                <initializer><constant>FALSE</constant></initializer>
+                            </methodparam>
+                            )
+                        </methodsynopsis>
                     </entry>
 
                     <entry>
@@ -500,8 +922,25 @@
 
                 <row>
                     <entry>
-                        <code>\Zend\Ldap\Ldap copyToSubtree(string|\Zend\Ldap\Dn $from,
-                        string|\Zend\Ldap\Dn $to, boolean $recursively)</code>
+                        <methodsynopsis>
+                            <type>\Zend\Ldap\Ldap</type>
+                            <methodname>copyToSubtree</methodname>
+                            (
+                            <methodparam>
+                                <type>string|\Zend\Ldap\Dn</type>
+                                <parameter>$from</parameter>
+                            </methodparam>,
+                            <methodparam>
+                                <type>string|\Zend\Ldap\Dn</type>
+                                <parameter>$to</parameter>
+                            </methodparam>,
+                            <methodparam>
+                                <type>boolean</type>
+                                <parameter>$recursively</parameter>
+                                <initializer><constant>FALSE</constant></initializer>
+                            </methodparam>
+                            )
+                        </methodsynopsis>
                     </entry>
 
                     <entry>
@@ -518,8 +957,25 @@
 
                 <row>
                     <entry>
-                        <code>\Zend\Ldap\Ldap copy(string|\Zend\Ldap\Dn $from,
-                        string|\Zend\Ldap\Dn $to, boolean $recursively)</code>
+                        <methodsynopsis>
+                            <type>\Zend\Ldap\Ldap</type>
+                            <methodname>copy</methodname>
+                            (
+                            <methodparam>
+                                <type>string|\Zend\Ldap\Dn</type>
+                                <parameter>$from</parameter>
+                            </methodparam>,
+                            <methodparam>
+                                <type>string|\Zend\Ldap\Dn</type>
+                                <parameter>$to</parameter>
+                            </methodparam>,
+                            <methodparam>
+                                <type>boolean</type>
+                                <parameter>$recursively</parameter>
+                                <initializer><constant>FALSE</constant></initializer>
+                            </methodparam>
+                            )
+                        </methodsynopsis>
                     </entry>
 
                     <entry>
@@ -534,7 +990,18 @@
                 </row>
 
                 <row>
-                    <entry><code>\Zend\Ldap\Node getNode(string|\Zend\Ldap\Dn $dn)</code></entry>
+                    <entry>
+                        <methodsynopsis>
+                            <type>\Zend\Ldap\Node</type>
+                            <methodname>getNode</methodname>
+                            (
+                            <methodparam>
+                                <type>string|\Zend\Ldap\Dn</type>
+                                <parameter>$dn</parameter>
+                            </methodparam>
+                            )
+                        </methodsynopsis>
+                    </entry>
 
                     <entry>
                         Returns the entry <varname>$dn</varname> wrapped in a
@@ -543,7 +1010,15 @@
                 </row>
 
                 <row>
-                    <entry><code>\Zend\Ldap\Node getBaseNode()</code></entry>
+                    <entry>
+                        <methodsynopsis>
+                            <type>\Zend\Ldap\Node</type>
+                            <methodname>getBaseNode</methodname>
+                            (
+                            <methodparam><void/></methodparam>
+                            )
+                        </methodsynopsis>
+                    </entry>
 
                     <entry>
                         Returns the entry for the base DN <varname>$baseDn</varname>
@@ -552,14 +1027,84 @@
                 </row>
 
                 <row>
-                    <entry><code>\Zend\Ldap\Node\RootDse getRootDse()</code></entry>
+                    <entry>
+                        <methodsynopsis>
+                            <type>\Zend\Ldap\Node\RootDse</type>
+                            <methodname>getRootDse</methodname>
+                            (
+                            <methodparam><void/></methodparam>
+                            )
+                        </methodsynopsis>
+                    </entry>
                     <entry>Returns the RootDSE for the current server.</entry>
                 </row>
 
                 <row>
-                    <entry><code>\Zend\Ldap\Node\Schema getSchema()</code></entry>
+                    <entry>
+                        <methodsynopsis>
+                            <type>\Zend\Ldap\Node\Schema</type>
+                            <methodname>getSchema</methodname>
+                            (
+                            <methodparam><void/></methodparam>
+                            )
+                        </methodsynopsis></entry>
                     <entry>
                         Returns the <acronym>LDAP</acronym> schema for the current server.
+                    </entry>
+                </row>
+            </tbody>
+            <tbody>
+                <row>
+                    <entry>
+                        <methodsynopsis>
+                            <type>string</type>
+                            <methodname>filterEscape</methodname>
+                            (
+                            <methodparam>
+                                <type>string</type>
+                                <parameter>$str</parameter>
+                            </methodparam>
+                        </methodsynopsis>
+                    </entry>
+
+                    <entry>
+                        Escapes a value to be used in a <acronym>LDAP</acronym> filter according to
+                        <acronym>RFC</acronym> 2254. This method is <emphasis>deprecated</emphasis>,
+                        please use <methodname>\Zend\Ldap\Filter_Abstract::escapeValue()</methodname>
+                        instead.
+                    </entry>
+                </row>
+
+                <row>
+                    <entry>
+                        <methodsynopsis>
+                            <type>boolean</type>
+                            <methodname>explodeDn</methodname>
+                            (
+                            <methodparam>
+                                <parameter>$dn</parameter>
+                            </methodparam>,
+                            <methodparam>
+                                <type>array</type>
+                                <parameter>&amp;$keys</parameter>
+                                <initializer>null</initializer>
+                            </methodparam>,
+                            <methodparam>
+                                <type>array</type>
+                                <parameter>&amp;$vals</parameter>
+                                <initializer>null</initializer>
+                            </methodparam>
+                            )
+                        </methodsynopsis>
+                    </entry>
+
+                    <entry>
+                        Checks if a given DN <varname>$dn</varname> is malformed. If
+                        <varname>$keys</varname> or <varname>$keys</varname> and
+                        <varname>$vals</varname> are given, these arrays will be filled with the
+                        appropriate DN keys and values. This method is
+                        <emphasis>deprecated</emphasis>, please use
+                        <methodname>\Zend\Ldap\Dn::checkDn()</methodname> instead.
                     </entry>
                 </row>
             </tbody>
@@ -570,9 +1115,9 @@
         <title>\Zend\Ldap\Collection</title>
 
         <para>
-            <classname>\Zend\Ldap\Collection</classname> implements <code>Iterator</code> to
+            <classname>\Zend\Ldap\Collection</classname> implements <classname>\Iterator</classname> to
             allow for item traversal using <methodname>foreach()</methodname> and
-            <code>Countable</code> to be able to respond to <methodname>count()</methodname>. With
+            <classname>\Countable</classname> to be able to respond to <methodname>count()</methodname>. With
             its protected <methodname>_createEntry()</methodname> method it provides a simple
             extension point for developers needing custom result objects.
         </para>
@@ -591,8 +1136,15 @@
                 <tbody>
                     <row>
                         <entry>
-                            <code>__construct(\Zend\Ldap\Collection\Iterator\Interface
-                            $iterator)</code>
+                            <constructorsynopsis>
+                                <methodname>__construct</methodname>
+                                (
+                                <methodparam>
+                                    <type>\Zend\Ldap\Collection\Iterator\Interface</type>
+                                    <parameter>$iterator</parameter>
+                                </methodparam>
+                                )
+                            </constructorsynopsis>
                         </entry>
 
                         <entry>
@@ -605,7 +1157,15 @@
                     </row>
 
                     <row>
-                        <entry><code>boolean close()</code></entry>
+                        <entry>
+                            <methodsynopsis>
+                                <type>boolean</type>
+                                <methodname>close</methodname>
+                                (
+                                <methodparam><void/></methodparam>
+                                )
+                            </methodsynopsis>
+                        </entry>
 
                         <entry>
                             Closes the internal iterator. This is also called in the destructor.
@@ -613,12 +1173,28 @@
                     </row>
 
                     <row>
-                        <entry><code>array toArray()</code></entry>
+                        <entry>
+                            <methodsynopsis>
+                                <type>array</type>
+                                <methodname>toArray</methodname>
+                                (
+                                <methodparam><void/></methodparam>
+                                )
+                            </methodsynopsis>
+                        </entry>
                         <entry>Returns all entries as an array.</entry>
                     </row>
 
                     <row>
-                        <entry><code>array getFirst()</code></entry>
+                        <entry>
+                            <medthodsynopsis>
+                                    <type>array</type>
+                                    <methodname>getFirst</methodname>
+                                    (
+                                    <methodparam><void/></methodparam>
+                                    )
+                            </methodsynopsis>
+                        </entry>
 
                         <entry>
                             Returns the first entry in the collection or

@@ -112,6 +112,7 @@
                                 <type>booleany</type>
                                 <property>useSsl</property>
                                 <initializer><constant>FALSE</constant></initializer>
+                            </synopsis>
                         </entry>
 
                         <entry>
@@ -128,6 +129,7 @@
                                 <type>string|\Zend\Ldap\Dn</type>
                                 <property>username</property>
                                 <initializer>NULL</initializer>
+                            </synopsis>
                         </entry>
 
                         <entry>
